@@ -54,71 +54,26 @@ ORDER BY last_name DESC, first_name;
 
 SELECT *
 FROM employees 
-WHERE last_name LIKE 'E%' OR last_name LIKE '%E';
+WHERE last_name LIKE 'E%' AND last_name LIKE '%E'
+ORDER BY emp_no;
 
--- a. Enter a comment with the number of employees returned, the first employee number and their first and last name, and the last employee number with their first and last name.
+-- a. Enter a comment with the number of employees returned, the first employee number and their first and last name... (899 observations), (10021	1960-02-20	Ramzi	Erde	M	1988-02-10) 
 
-
--- 6. Find all current or previous employees whose last name starts OR ends with 'E'. Enter a comment with the number of employees whose last name starts or ends with E. (30_723 observations)
-
-
--- How many employees have a last name that ends with E, but does not start with E? (23_393 observations)
+-- b. and the last employee number with their first and last name. (499648	1960-09-03	Tadahiro	Erde	F	1992-08-13)
 
 SELECT *
 FROM employees 
-WHERE last_name LIKE '%E' AND last_name NOT LIKE 'E%';
+WHERE last_name LIKE 'E%' AND last_name LIKE '%E'
+ORDER BY emp_no DESC;
 
--- 7. Find all current or previous employees employees whose last name starts AND ends with 'E'. Enter a comment with the number of employees whose last name starts and ends with E. (899 observations)
+-- 6. Write a query to to find all current employees whose last name starts and ends with 'E'. Sort the results by their hire date, so that the newest employees are listed first. Enter a comment with the number of employees returned, the name of the newest employee, and the name of the oldest emmployee.
 
-SELECT *
-FROM employees 
-WHERE last_name LIKE 'E%' AND last_name LIKE '%E';
 
--- We can also write our query like this... (899 observations; it matches.)
 
-SELECT *
-FROM employees
-WHERE last_name LIKE 'E%E';
+-- 7. Find all previous employees hired in the 90s and born on Christmas. Sort the results so that the oldest employee who was hired last is the first result. Enter a comment with the number of employees returned, the name of the oldest employee who was hired last, and the name of the youngest emmployee who was hired first.
 
--- How many employees' last names end with E, regardless of whether they start with E? (24_292 observations)
-
-SELECT *
-FROM employees 
-WHERE last_name LIKE '%E';
-
--- 8. Find all current or previous employees hired in the 90s. Enter a comment with the number of employees returned. 135_214
-
-SELECT * 
-FROM employees
-WHERE hire_date LIKE '199%';
-
--- We can also use WHERE BETWEEN AND. (135_214 observations; it matches.)
-
-SELECT * 
-FROM employees
-WHERE hire_date BETWEEN '1990-01-01' AND '1999-12-31';
-
--- 9. Find all current or previous employees born on Christmas. Enter a comment with the number of employees returned. (842 observations)
-
-SELECT *
-FROM employees
-WHERE birth_date LIKE '%-12-25';
-
--- 10. Find all current or previous employees hired in the 90s and born on Christmas. Enter a comment with the number of employees returned. (362 observations)
 
 SELECT *
 FROM employees
 WHERE hire_date BETWEEN '1990-01-01' AND '1999-12-31'
 AND birth_date LIKE '%-12-25';
-
--- 11. Find all current or previous employees with a 'q' in their last name. Enter a comment with the number of records returned. (1873 observations)
-
-SELECT *
-FROM employees
-WHERE last_name LIKE '%q%';
-
--- 12. Find all current or previous employees with a 'q' in their last name but not 'qu'. How many employees are found? (547 observations)
-
-SELECT *
-FROM employees
-WHERE last_name LIKE '%q%' AND NOT last_name LIKE '%qu%';
