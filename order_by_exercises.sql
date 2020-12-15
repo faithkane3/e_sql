@@ -50,7 +50,7 @@ FROM employees
 WHERE first_name = 'Irena' OR first_name = 'Vidya' OR first_name =  'Maya'
 ORDER BY last_name DESC, first_name;
 
--- 5. Write a query to find all current employees whose last name starts and ends with 'E'. Sort the results by their employee number. 
+-- 5. Write a query to find all current or previous employees whose last name starts AND ends with 'E'. Sort the results by their employee number. 
 
 SELECT *
 FROM employees 
@@ -66,11 +66,17 @@ FROM employees
 WHERE last_name LIKE 'E%' AND last_name LIKE '%E'
 ORDER BY emp_no DESC;
 
--- 6. Write a query to to find all current employees whose last name starts and ends with 'E'. Sort the results by their hire date, so that the newest employees are listed first. Enter a comment with the number of employees returned, the name of the newest employee, and the name of the oldest emmployee.
+-- 6. Write a query to to find all current or previous employees whose last name starts AND ends with 'E'. Sort the results by their hire date, so that the newest employees are listed first. 
+
+
+-- a. Enter a comment with the number of employees returned, the name of the newest employee, and the name of the oldest emmployee.
 
 
 
--- 7. Find all previous employees hired in the 90s and born on Christmas. Sort the results so that the oldest employee who was hired last is the first result. Enter a comment with the number of employees returned, the name of the oldest employee who was hired last, and the name of the youngest emmployee who was hired first.
+-- 7. Find all current or previous employees hired in the 90s AND born on Christmas. Sort the results so that the oldest employee who was hired last is the first result. 
+
+
+-- A. Enter a comment with the number of employees returned, the name of the oldest employee who was hired last, and the name of the youngest emmployee who was hired first.
 
 
 SELECT *
