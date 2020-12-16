@@ -1,9 +1,37 @@
 -- List all available databases, like 'ls'
 SHOW DATABASES;
 
+/*
+information_schema
+albums_db
+bayes
+bayes_825
+chipotle
+elo_db
+employees
+fruits_db
+iris_db
+join_example_db
+mall_customers
+mysql
+numbers
+quotes_db
+sakila
+svi_db
+telco_churn
+titanic_db
+tsa_item_demand
+world
+zillow
+*/
+
 -- Choose and use a database, like cd. Here, I'm using sakila. Backticks can also be used if necessary.
 USE sakila;
 USE `sakila`;
+
+/*
+sakila
+*/
 
 -- Show the currently selected db, like pwd.
 SELECT database();
@@ -18,3 +46,7 @@ USE employees;
 
 -- Confirm currently selected db.
 SELECT database();
+
+/*
+employees
+*/
