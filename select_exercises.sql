@@ -11,40 +11,40 @@ FROM albums WHERE artist = 'Pink Floyd';
 
 -- b. the year Sgt. Pepper's Lonely Hearts Club Band was released.
 
-SELECT release_date as 'Release Date for Sgt. Pepper\'s Lonely Hearts Club Band'
+SELECT release_date AS 'Release Date for Sgt. Pepper\'s Lonely Hearts Club Band'
 FROM albums
 WHERE name = 'Sgt. Pepper\'s Lonely Hearts Club Band';
 
 -- c. the genre for the album Nevermind.
 
-SELECT genre as 'Genre for Nevermind'
+SELECT genre AS 'Genre for Nevermind'
 FROM albums
 WHERE name = 'Nevermind';
 
 -- d. albums were released in the 1990s.
 
 SELECT artist, 
-       name as 'Albums Released in the 1990s'
+       name AS 'Albums Released in the 1990s'
 FROM albums
 WHERE release_date LIKE '199%';
 
 -- We can also use WHERE BETWEEN AND.
 
 SELECT artist, 
-       name as 'Albums Released in the 1990s'
+       name AS 'Albums Released in the 1990s'
 FROM albums
 WHERE release_date BETWEEN 1990 AND 1999;
 
 -- We can find albums released in the 90s also using greater than or equal to and less than or equal to
 
 SELECT artist, 
-       name as 'Albums Released in the 1990s'
+       name AS 'Albums Released in the 1990s'
 FROM albums
 WHERE release_date >= 1990 AND release_date <= 1999;
 
 -- e. albums had less than 20 million certified sales.
 
-SELECT name as 'Albums Selling Less than 20 million'
+SELECT name AS 'Albums Selling Less than 20 million'
 FROM albums
 WHERE sales < 20;
 
