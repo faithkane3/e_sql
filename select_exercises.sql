@@ -1,6 +1,23 @@
--- 2. Use the albums_db database.
+-- 2. Select the albums db for use.
 
 USE albums_db;
+
+-- 3. Explore the structure of the albums table.
+
+-- I can show the tables housed in the db.
+SHOW tables;
+
+-- I can inspect a single table within the db.
+DESCRIBE albums;
+
+-- I can take a quick peak at the first 5 rows of the table.
+SELECT *
+FROM albums
+LIMIT 5;
+
+-- I can inspect the unique values of a single column if I like.
+SELECT DISTINCT(genre)
+FROM albums;
 
 -- 4. Write queries to find the following information:
 
