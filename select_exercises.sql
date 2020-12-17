@@ -1,6 +1,7 @@
--- 2. Select the albums db for use.
+-- 2. Select the albums db for use and display chosen db.
 
 USE albums_db;
+SELECT database();
 
 -- 3. Explore the structure of the albums table.
 
@@ -16,7 +17,7 @@ FROM albums
 LIMIT 5;
 
 -- I can inspect the unique values of a single column if I like.
-SELECT DISTINCT(genre)
+SELECT DISTINCT genre
 FROM albums;
 
 -- 4. Write queries to find the following information:
