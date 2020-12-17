@@ -24,7 +24,7 @@ FROM albums;
 
 -- a. the name of all albums by Pink Floyd.
 
-SELECT name as 'Albums by Pink Floyd'
+SELECT name AS 'Albums by Pink Floyd'
 FROM albums WHERE artist = 'Pink Floyd';
 
 -- b. the year Sgt. Pepper's Lonely Hearts Club Band was released.
