@@ -107,7 +107,7 @@ SELECT *
 FROM employees
 WHERE last_name LIKE '%q%';
 
--- 12. Find all employees with a 'q' in their last name but not 'qu'. How many employees are found? (547 observations)
+-- 12. Find all employees with a 'q' in their last name but NOT 'qu'. How many employees are found? (547 observations)
 
 SELECT *
 FROM employees
