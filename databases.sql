@@ -50,3 +50,6 @@ SELECT database();
 /*
 employees
 */
+
+-- Display a list of all of the tables in a database.
+SHOW tables;

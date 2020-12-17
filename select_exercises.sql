@@ -7,7 +7,7 @@ USE albums_db;
 -- a. the name of all albums by Pink Floyd.
 
 SELECT name as 'Albums by Pink Floyd'
-FROM albums where artist = 'Pink Floyd';
+FROM albums WHERE artist = 'Pink Floyd';
 
 -- b. the year Sgt. Pepper's Lonely Hearts Club Band was released.
 
@@ -26,7 +26,7 @@ WHERE name = 'Nevermind';
 SELECT artist, 
        name as 'Albums Released in the 1990s'
 FROM albums
-WHERE release_date like '199%';
+WHERE release_date LIKE '199%';
 
 -- We can also use WHERE BETWEEN AND.
 
