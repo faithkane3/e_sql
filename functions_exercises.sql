@@ -14,18 +14,32 @@ SELECT UPPER(CONCAT(first_name, ' ', last_name)) AS full_name
 FROM employees
 WHERE last_name LIKE 'E%E';
 
+-- This worst just as well.
+
+SELECT CONCAT(UPPER(first_name), ' ', UPPER(last_name)) AS full_name
+FROM employees
+WHERE last_name LIKE 'E%E';
+
 
 -- 4. For your query of employees born on Christmas AND hired in the 90s, use DATEDIFF() to find how many days they have been working at the company (Hint: You will also need to use NOW() or CURDATE()).
 
-SELECT emp_no, 
-       first_name, 
-       last_name, 
-       gender,
-       birth_date, 
-       hire_date,  
-       DATEDIFF(CURDATE(), hire_date) AS days_employeed
+SELECT emp_no,
+	   first_name,
+	   last_name,
+	   DATEDIFF(CURDATE(), hire_date) AS days_employed
 FROM employees
-WHERE birth_date LIKE '%-12-25' 
+WHERE birth_date LIKE '%-12-25'
+AND hire_date LIKE '199%';
+
+-- We can add more columns if we like, too. How about years employed?
+
+SELECT emp_no,
+	   first_name,
+	   last_name,
+	   DATEDIFF(CURDATE(), hire_date) AS days_employed,
+	   ROUND((DATEDIFF(CURDATE(), hire_date) / 365 )) AS years_employed
+FROM employees
+WHERE birth_date LIKE '%-12-25'
 AND hire_date LIKE '199%';
 
 -- 5. Find the smallest and largest salary from the salaries table. I'll check out salaries first.
