@@ -54,18 +54,14 @@ FROM employees;
 /* Below is an example of what the first 10 rows will look like:
 
 
-+------------+------------+-----------+------------+
-| username   | first_name | last_name | birth_date |
-+------------+------------+-----------+------------+
-| gface_0953 | Georgi     | Facello   | 1953-09-02 |
-| bsimm_0664 | Bezalel    | Simmel    | 1964-06-02 |
-| pbamf_1259 | Parto      | Bamford   | 1959-12-03 |
-| ckobl_0554 | Chirstian  | Koblick   | 1954-05-01 |
-| kmali_0155 | Kyoichi    | Maliniak  | 1955-01-21 |
-| apreu_0453 | Anneke     | Preusig   | 1953-04-20 |
-| tziel_0557 | Tzvetan    | Zielinski | 1957-05-23 |
-| skall_0258 | Saniya     | Kalloufi  | 1958-02-19 |
-| speac_0452 | Sumant     | Peac      | 1952-04-19 |
-| dpive_0663 | Duangkaew  | Piveteau  | 1963-06-01 |
-+------------+------------+-----------+------------+
+gface_0953	Georgi	   Facello	       1953-09-02
+bsimm_0664	Bezalel    Simmel	       1964-06-02
+pbamf_1259	Parto      Bamford	       1959-12-03
+ckobl_0554	Chirstian  Koblick         1954-05-01
+kmali_0155	Kyoichi    Maliniak	       1955-01-21
+apreu_0453	Anneke	   Preusig	       1953-04-20
+tziel_0557	Tzvetan    Zielinski	   1957-05-23
+skall_0258	Saniya	   Kalloufi	       1958-02-19
+speac_0452	Sumant	   Peac	           1952-04-19
+dpive_0663	Duangkaew  Piveteau        1963-06-01
 */
