@@ -43,13 +43,13 @@ SELECT database();
 
 
 
--- 6. Write a query to to find all current or previous employees whose last name starts AND ends with 'E'. Sort the results by their hire date, so that the newest employees are listed first. 
+-- 6. Write a query to to find all employees whose last name starts AND ends with 'E'. Sort the results by their hire date, so that the newest employees are listed first. 
 
 
 
 -- a. Enter a comment with the number of employees returned, the name of the newest employee (899 observations) (233488	1961-12-16	Sergi	Erde	F	1985-02-02) 
 
--- b. and the name of the oldest emmployee. (899 observations)(67892	1958-08-15	Teiji	Eldridge	M	1999-11-27)
+-- b. and the name of the oldest employee. (899 observations)(67892	1958-08-15	Teiji	Eldridge	M	1999-11-27)
 
 
 

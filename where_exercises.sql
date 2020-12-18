@@ -17,7 +17,7 @@ WHERE first_name = 'Irena'
     OR first_name = 'Vidya' 
     OR first_name =  'Maya';
 
--- 4. Find all employees with first names 'Irena', 'Vidya', or 'Maya', using OR, and who is male. Enter a comment with the number of records returned. (441 observations)
+-- 4. Find all employees with first names 'Irena', 'Vidya', or 'Maya', using OR, AND who is male. Enter a comment with the number of records returned. (441 observations)
 
 SELECT *
 FROM employees
