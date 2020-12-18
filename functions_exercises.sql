@@ -2,7 +2,7 @@
 
 USE employees;
 
--- 2. Write a query to to find all current employees whose last name starts and ends with 'E'. Use concat() to combine their first and last name together as a single column named full_name.
+-- 2. Write a query to to find all current employees whose last name starts AND ends with 'E'. Use CONCAT() to combine their first and last name together as a single column named full_name.
 
 SELECT CONCAT(first_name, ' ', last_name) AS full_name
 FROM employees
@@ -15,14 +15,14 @@ FROM employees
 WHERE last_name LIKE 'E%E';
 
 
--- 4. For your query of employees born on Christmas AND hired in the 90s, use datediff() to find how many days they have been working at the company (Hint: You will also need to use NOW() or CURDATE()).
+-- 4. For your query of employees born on Christmas AND hired in the 90s, use DATEDIFF() to find how many days they have been working at the company (Hint: You will also need to use NOW() or CURDATE()).
 
 SELECT emp_no, 
-       birth_date, 
-       hire_date, 
        first_name, 
        last_name, 
-       gender, 
+       gender,
+       birth_date, 
+       hire_date,  
        DATEDIFF(CURDATE(), hire_date) AS days_employeed
 FROM employees
 WHERE birth_date LIKE '%-12-25' 
