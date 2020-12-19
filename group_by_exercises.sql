@@ -154,6 +154,7 @@ SELECT DISTINCT LOWER(CONCAT(SUBSTR(first_name, 1, 1),
 					)) AS user_name
 FROM employees;
 
+-- OR
 
 SELECT LOWER(CONCAT(SUBSTR(first_name, 1, 1), 
 						SUBSTR(last_name, 1, 4), 
