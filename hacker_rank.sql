@@ -118,3 +118,26 @@ WHERE wp.is_evil = 0
                           WHERE w.power=w2.power
                           AND wp.age=wp2.age)
 ORDER BY w.power DESC, wp.age DESC;
+
+/*
+You did such a great job helping Julia with her last coding contest challenge that she wants you to work on this one, too!
+
+The total score of a hacker is the sum of their maximum scores for all of the challenges. Write a query to print the hacker_id, name, and total score of the hackers ordered by the descending score. If more than one hacker achieved the same total score, then sort the result by ascending hacker_id. Exclude all hackers with a total score of  from your result.
+
+Getting closer on being able to do subqueries like this, but still way more learning to do.
+*/
+
+SELECT h.hacker_id, 
+       name, 
+       SUM(score) AS total_score
+FROM hackers AS h 
+INNER JOIN
+            /* find max_score */
+            (select hacker_id, 
+                    MAX(score) AS score 
+             FROM submissions 
+             GROUP BY challenge_id, hacker_id) AS max_score
+        ON h.hacker_id=max_score.hacker_id
+GROUP BY h.hacker_id, name
+HAVING total_score > 0
+ORDER BY total_score DESC, h.hacker_id ASC;
