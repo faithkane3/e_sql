@@ -151,8 +151,18 @@ If more than one student created the same number of challenges and the count is 
 */
 
 /*
-This is my day after Christmas push.
+List each continent and the an
 */
+
+SELECT continent,
+       name
+FROM country x
+WHERE x.name <= ALL(
+                    SELECT y.name
+                    FROM country y
+                    WHERE x.continent = y.continent
+                    )
+ORDER BY continent;
 
 /*You are given two sets.
 Set A = {1,2,3,4,5,6}
