@@ -153,3 +153,13 @@ If more than one student created the same number of challenges and the count is 
 /*
 This is my day after Christmas push.
 */
+
+/*You are given two sets.
+Set A = {1,2,3,4,5,6}
+Set B = {2,3,4,5,6,7,8}
+
+How many elements are present in A Union B?
+
+8 elements are present in A Union B.
+*/
+
