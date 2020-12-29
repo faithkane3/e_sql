@@ -143,15 +143,7 @@ HAVING total_score > 0
 ORDER BY total_score DESC, h.hacker_id ASC;
 
 /*
-Julia asked her students to create some coding challenges. Write a query to print the hacker_id, name, and the total number of challenges created by each student. 
-
-Sort your results by the total number of challenges in descending order. If more than one student created the same number of challenges, then sort the result by hacker_id. 
-
-If more than one student created the same number of challenges and the count is less than the maximum number of challenges created, then exclude those students from the result.
-*/
-
-/*
-List each continent and the an
+List each continent and the name of the country that comes first alphabetically. Here I use ALL with a subquery.
 */
 
 SELECT continent,
@@ -163,6 +155,16 @@ WHERE x.name <= ALL(
                     WHERE x.continent = y.continent
                     )
 ORDER BY continent;
+
+/*
+Julia asked her students to create some coding challenges. Write a query to print the hacker_id, name, and the total number of challenges created by each student. 
+
+Sort your results by the total number of challenges in descending order. If more than one student created the same number of challenges, then sort the result by hacker_id. 
+
+If more than one student created the same number of challenges and the count is less than the maximum number of challenges created, then exclude those students from the result.
+*/
+
+
 
 /*You are given two sets.
 Set A = {1,2,3,4,5,6}
