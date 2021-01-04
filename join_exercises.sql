@@ -53,24 +53,42 @@ _____________________________________________________
 4	adam	adam@example.com	   3	3	reviewer
 */
 
+-- If I want to handle the duplicate names in my tables, I could tweak my query like this...
+
+SELECT
+	users.*,
+	roles.name AS role_name
+FROM users
+JOIN roles ON users.role_id = roles.id;
+
+/*
+id  name    email             role_id  role_name
+____________________________________________________
+1	bob	    bob@example.com	    1	   admin
+2	joe	    joe@example.com   	2	   author
+3	sally	sally@example.com	3	   reviewer
+4	adam	adam@example.com	3	   reviewer
+*/
+
 -- b. Use LEFT JOIN. This returns all of the rows from the left table and only rows from the right table with a match on the left table.
 
 SELECT
-	*
+	users.*,
+	roles.name AS role_name
 FROM users
 LEFT JOIN roles ON users.role_id = roles.id;
 
 -- (6 rows) (Jane and Mike are here now with NULL values for role_id, id, and name because all rows brought from the left table, users, but commenter still missing because no match on the left table.)
 
 /*
-id  name     email             role_id  id  name
+id  name     email             role_id  role_name
 _____________________________________________________
-1	bob	    bob@example.com	       1	1	admin
-2	joe	    joe@example.com	       2	2	author
-3	sally	sally@example.com	   3	3	reviewer
-4	adam	adam@example.com	   3	3	reviewer
-5	jane	jane@example.com	 NULL  NULL	NULL
-6	mike	mike@example.com	 NULL  NULL	NULL
+1	bob	    bob@example.com	       1	admin
+2	joe	    joe@example.com	       2	author
+3	sally	sally@example.com	   3	reviewer
+4	adam	adam@example.com	   3	reviewer
+5	jane	jane@example.com	 NULL   NULL
+6	mike	mike@example.com	 NULL   NULL
 */
 
 -- c. Use RIGHT JOIN. This does the opposite of the LEFT JOIN. This is not a common join because you can just reverse the order of your tables in your join and use a LEFT JOIN.
@@ -83,13 +101,13 @@ RIGHT JOIN roles ON users.role_id = roles.id;
 -- (5 rows) (Jane and Mike are missing now, but the non-matching rows from the right table, roles, are present with NULL values for the missing info from the left table, users.)
 
 /*
-id  name     email             role_id  id  name
+id  name     email             role_id  role_name
 _____________________________________________________
-1	bob	    bob@example.com	       1	1	admin
-2	joe	    joe@example.com	       2	2	author
-3	sally	sally@example.com	   3	3	reviewer
-4	adam	adam@example.com	   3	3	reviewer
-NULL NULL	NULL	              NULL	4	commenter
+1	bob	    bob@example.com	       1	admin
+2	joe	    joe@example.com	       2	author
+3	sally	sally@example.com	   3	reviewer
+4	adam	adam@example.com	   3	reviewer
+NULL NULL	NULL	              NULL	commenter
 */
 
 -- 3. Although not explicitly covered in the lesson, aggregate functions like count can be used with join queries. Use count and the appropriate join type to get a list of roles along with the number of users that has the role. Hint: You will also need to use group by in the query.
