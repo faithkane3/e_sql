@@ -111,3 +111,22 @@ NULL NULL	NULL	              NULL	commenter
 */
 
 -- 3. Although not explicitly covered in the lesson, aggregate functions like count can be used with join queries. Use count and the appropriate join type to get a list of roles along with the number of users that has the role. Hint: You will also need to use group by in the query.
+
+SELECT
+    -- rename name column from roles role_name for clarity.
+	roles.name AS role_name,
+    
+    -- I want to count the employees from users with each name from roles.
+	COUNT(users.name) AS number_of_employees
+FROM users
+RIGHT JOIN roles ON users.role_id = roles.id
+GROUP BY role_name;
+
+/*
+role_name   number_of_employees
+_________________________________
+admin	    1
+author	    1
+commenter	0
+reviewer	2
+*/
