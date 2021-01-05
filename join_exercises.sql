@@ -446,4 +446,23 @@ JOIN (SELECT
 		 AND to_date > CURDATE()) AS m ON m.dept_no = d.dept_no
 ORDER BY d.dept_name;
 
+-- Bonus 10 using a self-join.
+
+-- Using a self join.
+
+SELECT 
+    CONCAT(e.first_name, ' ', e.last_name) AS 'Employee Name',
+    d.dept_name AS 'Department Name',
+    CONCAT(managers.first_name, ' ', managers.last_name) AS 'Manager_name'
+FROM dept_emp AS de
+JOIN employees AS e USING(emp_no)
+JOIN departments AS d ON d.dept_no = de.dept_no
+-- Get the current department managers.
+JOIN dept_manager AS dm ON dm.dept_no = d.dept_no 
+    AND dm.to_date > CURDATE()
+-- Join employees again as managers
+JOIN employees AS managers ON managers.emp_no = dm.emp_no
+WHERE de.to_date > CURDATE()
+ORDER BY d.dept_name;
+
 -- 11. Bonus: Who is the highest paid employee within each department.
