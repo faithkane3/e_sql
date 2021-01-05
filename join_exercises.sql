@@ -35,7 +35,7 @@ ______________
 
 -- 2. Use join, left join, and right join to combine results from the users and roles tables as we did in the lesson. Before you run each query, guess the expected number of results
 
--- a. Use JOIN (INNER JOIN - a logical AND statement, the intersection of users table and roles table). This returns only the rows with matches on both the left AND right tables.
+-- a. Use JOIN (INNER JOIN - a logical AND statement, the intersection of the users table and the roles table). This returns only the rows with matches on both the left AND right tables. No NULL values.
 
 SELECT
 	*
@@ -53,7 +53,7 @@ _____________________________________________________
 4	adam	adam@example.com	   3	3	reviewer
 */
 
--- If I want to handle the duplicate names in my tables, I could tweak my query like this...
+-- If I want to handle the duplicate names in my tables, I could tweak my SELECT statement like this. I'll use this SELECT statement going forward for clarity in my joined table.
 
 SELECT
 	users.*,
@@ -164,6 +164,7 @@ SELECT
 	d.dept_name,
 	CONCAT(e.first_name, ' ', e.last_name) AS current_department_manager
 FROM employees AS e
+-- I can have multiple conditions in my JOIN logic. Only current department managers. I have to use "ON".
 JOIN dept_manager AS dm ON e.emp_no = dm.emp_no
 	AND to_date > CURDATE()
 JOIN departments AS d USING(dept_no)
@@ -176,6 +177,7 @@ SELECT
 	CONCAT(e.first_name, ' ', e.last_name) AS current_department_manager,
 	gender
 FROM employees AS e
+-- I can add logic into my JOIN to now also filter for females only.
 JOIN dept_manager AS dm ON e.emp_no = dm.emp_no
 	AND to_date > CURDATE()
 	AND gender = 'F'
@@ -213,7 +215,7 @@ FROM dept_emp AS de
 JOIN titles AS t ON de.emp_no = t.emp_no
 	AND t.to_date > CURDATE()
 	AND de.to_date > CURDATE()
--- I can have multiple conditions in my JOIN logic. Only employees in the Customer Service department.
+-- I can have multiple conditions in my JOIN logic. Only the Customer Service department.
 JOIN departments AS d ON d.dept_no = de.dept_no
 	AND dept_name = 'Customer Service'
 -- My dimension. (rows)
@@ -457,12 +459,10 @@ SELECT
 FROM dept_emp AS de
 JOIN employees AS e USING(emp_no)
 JOIN departments AS d ON d.dept_no = de.dept_no
--- Get the current department managers.
+-- Get the current department managers, join on dept_no.
 JOIN dept_manager AS dm ON dm.dept_no = d.dept_no 
     AND dm.to_date > CURDATE()
--- Join employees again as managers
+-- Join employees again as managers to get manager names.
 JOIN employees AS managers ON managers.emp_no = dm.emp_no
 WHERE de.to_date > CURDATE()
 ORDER BY d.dept_name;
-
--- 11. Bonus: Who is the highest paid employee within each department.
