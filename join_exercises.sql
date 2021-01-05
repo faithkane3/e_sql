@@ -419,6 +419,17 @@ FROM departments;
 
 -- JOIN tables and query.
 
+-- Create table to get current manager names and department numbers. Join this table as m in larger query below.
+
+SELECT
+	dm.dept_no,
+	CONCAT(e.first_name, ' ', e.last_name) AS managers
+FROM employees AS e
+JOIN dept_manager AS dm ON e.emp_no = dm.emp_no
+	AND to_date > CURDATE();
+
+-- Create query to get current employee names and dept names and manager names by joining subquery above.
+
 SELECT
 	CONCAT(e.first_name, ' ', e.last_name) AS 'Employee Name',
 	d.dept_name AS 'Department Name',
