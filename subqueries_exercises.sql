@@ -33,34 +33,31 @@ Technique Leader
 */
 
 -- emp_no, first_name, last_name, dept_no, dept_name
-SELECT
-	*
-FROM employees_with_departments;
 
--- emp_no, title, from_date, to_date
-SELECT
-	*
-FROM titles;
-
-
--- Create my subquery to find name Aamod.
+-- Create my subquery to find current employees with the name Aamod. (168 current employees named Aamad.)
 SELECT
 	first_name
-FROM employees_with_departments AS ewd
+FROM employees AS e
+JOIN salaries AS s ON e.emp_no = s.emp_no
+	AND to_date > CURDATE()
 WHERE first_name = 'Aamod';
 
--- Use subquery in the WHERE clause of my query to find any titles every held by those with the first name Aamod.
+
+-- Use subquery in the WHERE clause of my query to find any titles ever held by current employees with the first name Aamod. (6 titles every held by a current employee named Aamad.)
 
 SELECT
 	title
-FROM employees_with_departments AS ewd
+FROM employees AS e
 JOIN titles AS t USING(emp_no)
-WHERE ewd.first_name IN (SELECT
-							first_name
-						 FROM employees_with_departments AS ewd
-						 WHERE first_name = 'Aamod')
+WHERE d.first_name IN (
+                        SELECT
+                            first_name
+                        FROM employees AS e
+                        JOIN salaries AS s ON e.emp_no = s.emp_no
+                        AND to_date > CURDATE()
+                        WHERE first_name = 'Aamod'
+                      )
 GROUP BY title;
-
 
 
 
@@ -117,13 +114,70 @@ WHERE emp_no IN (
 AND gender = 'F';
 
 
--- 5. Find all the employees who currently have a higher salary than the companies overall, historical average salary.
+-- 5. Find all the employees who currently have a higher salary than the companies overall, historical average salary. 
 
+-- 154_543 employees currently have a higher salary than the historical average salary.
 
+-- My subquery -> Get the historical average salary.
+SELECT
+	AVG(salary) AS historical_average_salary
+FROM salaries;
+
+-- Use my subquery
+
+SELECT
+	e.emp_no,
+	first_name,
+	last_name
+FROM employees AS e
+JOIN salaries AS s ON e.emp_no = s.emp_no
+	AND to_date > CURDATE()
+WHERE salary > (
+				SELECT
+					AVG(salary) AS historical_average_salary
+				FROM salaries
+				);
 
 
 -- 6. How many current salaries are within 1 standard deviation of the current highest salary? (Hint: you can use a built in function to calculate the standard deviation.) What percentage of all salaries is this?
 
+-- My subquery -> Get 1 stddev of max salary. (140910.04066365326)
+SELECT
+	(MAX(salary) - STDDEV(salary)) AS salary_within_one_stddev_of_max
+FROM salaries
+WHERE to_date > CURDATE();
 
+-- Use my subquery in the WHERE clause to get the 83.
+
+SELECT
+	COUNT(salary) AS salaries_within_1_stddev
+FROM salaries 
+WHERE to_date > CURDATE()
+AND salary > (
+				SELECT
+					(MAX(salary) - STDDEV(salary)) AS salary_within_one_stddev_of_max
+				FROM salaries
+				WHERE to_date > CURDATE()
+				);
+			  
+-- Use my query from above now as a subquery!
+		 
+SELECT 
+	CONCAT(
+		(SELECT
+			COUNT(salary) AS salaries_within_1_stddev
+		FROM salaries 
+		WHERE to_date > CURDATE()
+		AND salary > (
+					  SELECT
+						(MAX(salary) - STDDEV(salary)) AS salary_within_one_stddev_of_max
+					  FROM salaries
+					  WHERE to_date > CURDATE())
+		) 
+/ 
+		(
+		 SELECT COUNT(*)
+		 FROM salaries
+		 WHERE to_date > CURDATE()) * 100, '%') AS percent_of_salaries_within_1_stddev_of_max;
 
 
