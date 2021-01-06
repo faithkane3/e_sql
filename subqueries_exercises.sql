@@ -1,12 +1,15 @@
 -- 1. Find all the current employees with the same hire date as employee 101010 using a sub-query.
 -- (55 current employees have the same hire date as employee 101010)
--- Get the hire date of employee 101010
+
+-- Get the hire date of employee 101010.
+
 SELECT
 	hire_date
 FROM employees
 WHERE emp_no = 101010;
 
 -- Use the above query as a scaler subquery. (returns exactly one column value from one row)
+
 SELECT
 	first_name,
 	last_name,
@@ -21,6 +24,7 @@ WHERE hire_date = (SELECT
                     );
 
 -- 2. Find all the titles ever held by all current employees with the first name Aamod. 
+
 /*
 Assistant Engineer
 Engineer
@@ -30,9 +34,8 @@ Staff
 Technique Leader
 */
 
--- emp_no, first_name, last_name, dept_no, dept_name
-
 -- Create my subquery to find current employees with the name Aamod. (168 current employees named Aamad.)
+
 SELECT
 	first_name
 FROM employees AS e
@@ -41,7 +44,7 @@ JOIN salaries AS s ON e.emp_no = s.emp_no
 WHERE first_name = 'Aamod';
 
 
--- Use subquery in the WHERE clause of my query to find any titles ever held by current employees with the first name Aamod. (6 titles every held by a current employee named Aamad.)
+-- Use my subquery in the WHERE clause of my query to find any titles ever held by current employees with the first name Aamod. (6 titles every held by a current employee named Aamad.)
 
 SELECT
 	title
@@ -115,6 +118,7 @@ AND gender = 'F';
 -- 154_543 employees currently have a higher salary than the historical average salary.
 
 -- My subquery -> Get the historical average salary. (63810.7448)
+
 SELECT
 	AVG(salary) AS historical_average_salary
 FROM salaries;
