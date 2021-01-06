@@ -51,13 +51,13 @@ SELECT
 FROM employees AS e
 JOIN titles AS t USING(emp_no)
 WHERE first_name IN (
-                        SELECT
-                            first_name
-                        FROM employees AS e
-                        JOIN salaries AS s ON e.emp_no = s.emp_no
-                        AND to_date > CURDATE()
-                        WHERE first_name = 'Aamod'
-                      )
+                    SELECT
+                        first_name
+                    FROM employees AS e
+                    JOIN salaries AS s ON e.emp_no = s.emp_no
+                    AND to_date > CURDATE()
+                    WHERE first_name = 'Aamod'
+                    )
 GROUP BY title;
 
 
@@ -77,7 +77,7 @@ SELECT
 	COUNT(emp_no) AS number_of_exemployees
 FROM employees
 WHERE emp_no NOT IN (
-					SELECT
+                    SELECT
                         emp_no
                     FROM salaries 
                     WHERE to_date > CURDATE()
@@ -105,10 +105,10 @@ SELECT
 	CONCAT(first_name, ' ', last_name) AS female_managers
 FROM employees
 WHERE emp_no IN (
-				SELECT
-					emp_no
-				FROM dept_manager
-				WHERE to_date > CURDATE()
+			SELECT
+				emp_no
+			FROM dept_manager
+			WHERE to_date > CURDATE()
 				)
 AND gender = 'F';
 
