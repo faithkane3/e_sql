@@ -47,7 +47,7 @@ SELECT
 	title
 FROM employees AS e
 JOIN titles AS t USING(emp_no)
-WHERE d.first_name IN (
+WHERE first_name IN (
                         SELECT
                             first_name
                         FROM employees AS e
@@ -151,7 +151,7 @@ FROM salaries
 WHERE to_date > CURDATE()
 AND salary > (
 				SELECT
-					(MAX(salary) - STDDEV(salary)) AS salary_within_one_stddev_of_max
+					(MAX(salary) - STDDEV(salary))
 				FROM salaries
 				WHERE to_date > CURDATE()
 				);
@@ -161,12 +161,12 @@ AND salary > (
 SELECT 
 	CONCAT(
 		(SELECT
-			COUNT(salary) AS salaries_within_1_stddev
+			COUNT(salary)
 		FROM salaries 
 		WHERE to_date > CURDATE()
 		AND salary > (
 					  SELECT
-						(MAX(salary) - STDDEV(salary)) AS salary_within_one_stddev_of_max
+						(MAX(salary) - STDDEV(salary))
 					  FROM salaries
 					  WHERE to_date > CURDATE())
 		) 
@@ -175,5 +175,4 @@ SELECT
 		 SELECT COUNT(*)
 		 FROM salaries
 		 WHERE to_date > CURDATE()) * 100, '%') AS percent_of_salaries_within_1_stddev_of_max;
-
 
