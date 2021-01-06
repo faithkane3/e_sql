@@ -154,10 +154,10 @@ SELECT
 FROM salaries 
 WHERE to_date > CURDATE()
 AND salary > (
-	SELECT
-		(MAX(salary) - STDDEV(salary))
-	FROM salaries
-	WHERE to_date > CURDATE()
+        SELECT
+            (MAX(salary) - STDDEV(salary))
+        FROM salaries
+        WHERE to_date > CURDATE()
 	);
 			  
 -- Use my query from above now as a subquery!
@@ -176,8 +176,8 @@ SELECT
 		) 
 / 
 		(
-		 SELECT 
+		SELECT 
             COUNT(*)
-		 FROM salaries
-		 WHERE to_date > CURDATE()) * 100, '%') AS percent_of_salaries_within_1_stddev_of_max;
+		FROM salaries
+		WHERE to_date > CURDATE()) * 100, '%') AS percent_of_salaries_within_1_stddev_of_max;
 
