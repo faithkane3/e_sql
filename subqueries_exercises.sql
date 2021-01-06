@@ -1,10 +1,9 @@
 -- 1. Find all the current employees with the same hire date as employee 101010 using a sub-query.
-
+-- (55 current employees have the same hire date as employee 101010)
 -- Get the hire date of employee 101010
 SELECT
 	hire_date
-FROM dept_emp
-JOIN employees USING(emp_no)
+FROM employees
 WHERE emp_no = 101010;
 
 -- Use the above query as a scaler subquery. (returns exactly one column value from one row)
@@ -16,11 +15,10 @@ FROM employees
 JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
 	AND dept_emp.to_date > CURDATE()
 WHERE hire_date = (SELECT
-						hire_date
-					FROM dept_emp
-					JOIN employees USING(emp_no)
-					WHERE emp_no = 101010
-					);
+                       hire_date
+                   FROM employees
+                   WHERE emp_no = 101010
+                    );
 
 -- 2. Find all the titles ever held by all current employees with the first name Aamod. 
 /*
@@ -66,10 +64,9 @@ GROUP BY title;
 -- My subquery -> All employee numbers of employees currently getting a salary. 
 
 SELECT
-	e.emp_no
-FROM employees AS e
-JOIN salaries AS s ON s.emp_no = e.emp_no
-	AND s.to_date > CURDATE();
+	emp_no
+FROM salaries 
+WHERE to_date > CURDATE();
 
 -- Count of employees in the employees table whose employee numbers are not getting a salary.
 
@@ -78,10 +75,9 @@ SELECT
 FROM employees
 WHERE emp_no NOT IN (
 					SELECT
-						e.emp_no
-					FROM employees AS e
-					JOIN salaries AS s ON s.emp_no = e.emp_no
-						AND s.to_date > CURDATE()
+                        emp_no
+                    FROM salaries 
+                    WHERE to_date > CURDATE()
 					);
 
 -- 4. Find all the current department managers that are female. List their names in a comment in your code.
@@ -118,7 +114,7 @@ AND gender = 'F';
 
 -- 154_543 employees currently have a higher salary than the historical average salary.
 
--- My subquery -> Get the historical average salary.
+-- My subquery -> Get the historical average salary. (63810.7448)
 SELECT
 	AVG(salary) AS historical_average_salary
 FROM salaries;
