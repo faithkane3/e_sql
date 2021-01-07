@@ -33,8 +33,6 @@ JOIN (SELECT
 	GROUP BY emp_no) AS last_dept
 ON dept_emp.emp_no = last_dept.emp_no;
 
-
-
 -- 2. Write a query that returns all employee names (previous and current), and a new column 'alpha_group' that returns 'A-H', 'I-Q', or 'R-Z' depending on the first letter of their last name.
 
 SELECT
@@ -46,14 +44,42 @@ SELECT
 	END AS alpha_group
 FROM employees;
 
-
 --3. How many employees (current or previous) were born in each decade?
 
+-- Oldest birth dates in 1952, 19605 the most recent.
 
+SELECT
+	* 
+FROM employees
+ORDER BY birth_date DESC
+LIMIT 5;
 
+-- Create and count the decade bins.
 
+SELECT
+	CASE
+		WHEN birth_date LIKE '195%' THEN '50s'
+		WHEN birth_date LIKE '196%' THEN '60s'
+		ELSE 'YOUNG'
+	END AS decade,
+	COUNT(*)
+FROM employees
+GROUP BY decade;
 
 -- Bonus: What is the current average salary for each of the following department groups: R&D, Sales & Marketing, Prod & QM, Finance & HR, Customer Service?
 
+SELECT
+	CASE
+		WHEN dept_name IN('Research', 'Development') THEN 'R&D'
+		WHEN dept_name IN('Sales', 'Marketing') THEN 'Sales & Marketing'
+		WHEN dept_name IN('Production', 'Quality Management') THEN 'QM'
+		WHEN dept_name IN('Finance', 'Human Resources') THEN 'Finance & HR'
+		ELSE 'Customer Service'
+	END AS department_group,
+	ROUND(AVG(salary), 2) AS average_salary
+FROM salaries AS s
+JOIN employees_with_departments AS ewd ON s.emp_no = ewd.emp_no
+	AND s.to_date > CURDATE()
+GROUP BY department_group;
 
 
