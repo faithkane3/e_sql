@@ -72,4 +72,36 @@ LIMIT 10;
 
 -- 3. Find out how the current average pay in each department compares to the overall, historical average pay. In order to make the comparison easier, you should use the Z-score for salaries. In terms of salary, what is the best department right now to work for? The worst?
 
+CREATE TEMPORARY TABLE hist_avg_salary AS
+	(
+		SELECT(salary) 
+		FROM employees.salaries);
+		
+SELECT *
+FROM hist_avg_salary;
 
+CREATE TEMPORARY TABLE dept_avg_salary AS (
+										SELECT 
+											dept_name, 
+											AVG(salary) AS avg_salary
+										FROM employees.salaries
+										JOIN employees.dept_emp USING (emp_no)
+										JOIN employees.departments USING(dept_no)
+										WHERE employees.salaries.to_date > curdate()
+										GROUP BY dept_name
+										ORDER BY avg_salary DESC
+ 										);
+
+
+
+SELECT *
+FROM dept_avg_salary;
+
+# z_score formula: z=(x-u)/stddev
+SELECT 
+	*, 
+	ROUND(
+		(avg_salary - (SELECT * FROM hist_avg_salary))
+	/
+		(SELECT STDDEV(salary) FROM employees.salaries), 3) AS z_score
+FROM dept_avg_salary;

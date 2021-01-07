@@ -58,15 +58,12 @@ INSERT INTO fruits (name) VALUES
 	("Banana");
 	
 SELECT * from fruits;
+
 -- delete from fruits where name = "Tangerine";
 
 
-
-
-
-
-
 -- Add a new column to the fruits temporary table named quantity and the datatype is positive integers
+
 ALTER TABLE fruits ADD quantity INT UNSIGNED;
 
 ALTER TABLE fruits DROP COLUMN id;
@@ -74,18 +71,21 @@ ALTER TABLE fruits DROP COLUMN id;
 SELECT * from fruits;
 
 -- syntax for updating an entire column
+
 UPDATE fruits
 SET quantity = 10;
 
 SELECT * from fruits;
 
 -- How to update a specific row's column value
+
 UPDATE fruits
 SET quantity = quantity * 10;
 
 select * from fruits;
 
 -- change gala apple to red apple
+
 UPDATE fruits
 SET name = "Red Apple"
 WHERE name = "Gala Apple";
