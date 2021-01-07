@@ -176,8 +176,8 @@ SELECT
 		) 
 / 
 		(
-	SELECT 
+    SELECT 
         COUNT(*)
-	FROM salaries
+    FROM salaries
 	WHERE to_date > CURDATE()) * 100, '%') AS percent_of_salaries_within_1_stddev_of_max;
 
