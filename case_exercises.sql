@@ -1,10 +1,58 @@
 -- Create a file named case_exercises.sql and craft queries to return the results for the following criteria:
--- (Use CASE statements or IF() function to explore information in the employees database
-)
+-- (Use CASE statements or IF() function to explore information in the employees database)
 
 -- 1. Write a query that returns all employees (emp_no), their department number, their start date, their end date, and a new column 'is_current_employee' that is a 1 if the employee is still with the company and 0 if not.   (300_024 records returned without duplicate departments for any employee)
 
 USE employees;
+
+-- Explore the tables to make sure that my observations are what I think they are here.
+
+-- 331_603 rows because some employees have been in more than one department.
+
+SELECT
+	*
+FROM dept_emp;
+
+-- 331_603 rows because some employees have been in more than one department.
+
+SELECT
+	*
+FROM employees_with_departments;
+
+-- 300_024 rows because each row represents only on employee and is present only one time.
+
+SELECT
+	*
+FROM employees;
+
+-- All employee numbers, managers included, are in the dept_emp table and the employees_with_departments table.
+
+SELECT
+	emp_no
+FROM dept_manager
+WHERE emp_no NOT IN (SELECT
+						emp_no
+					FROM dept_emp);
+
+-- All employee numbers in employees_with_departments are in dept_emp.
+
+SELECT
+	emp_no
+FROM employees_with_departments
+WHERE emp_no NOT IN (SELECT
+						emp_no
+					FROM dept_emp);
+					
+-- All employee numbers, including managers, are in employees. 3000_024 rows
+
+SELECT
+	emp_no
+FROM dept_manager 
+WHERE emp_no NOT IN (SELECT
+				emp_no
+			  FROM employees);
+
+##################################################
 
 -- Subquery to get the most recent departments for each employee.
 
@@ -30,6 +78,8 @@ JOIN (SELECT
 	GROUP BY emp_no) AS last_dept
 ON dept_emp.emp_no = last_dept.emp_no
 	AND dept_emp.to_date = last_dept.max_date;
+
+-- If I want the actual hire_date, I have to JOIN employees and bring that in. Otherwise, from_date only applies to the current or last department for that employee.
 
 SELECT
 	dept_emp.emp_no,
