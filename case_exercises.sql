@@ -54,6 +54,16 @@ WHERE emp_no NOT IN (SELECT
 
 ##################################################
 
+-- This is Easy!!!
+
+SELECT
+	emp_no,
+	dept_no,
+	from_date,
+	to_date,
+	IF(to_date = '9999-01-01', 1, 0) AS is_current_employee
+FROM dept_emp;
+
 -- Subquery to get the most recent departments for each employee.
 
 SELECT 
@@ -61,6 +71,8 @@ SELECT
 	MAX(to_date) AS max_date
 FROM dept_emp
 GROUP BY emp_no;
+
+-- Wait...my observations are not employees; they are emp_no and dept_no. I have to do more...
 
 -- Use my subquery to get rid of the duplicate entries for employees older departments. BUT this is not the employees hire_date.
 
@@ -149,5 +161,3 @@ FROM salaries AS s
 JOIN employees_with_departments AS ewd ON s.emp_no = ewd.emp_no
 	AND s.to_date > CURDATE()
 GROUP BY department_group;
-
-
